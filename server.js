@@ -1,8 +1,7 @@
 var app = require('express')();
 const http = require('http').createServer(app);
 
-const io = require('socket.io')(http);
-io.set('origins', '*:*');
+const io = require('socket.io')(http, { origins: '*:*'});
 const uuid = require('uuid/v4');
 var cors = require("cors");
 
@@ -13,7 +12,7 @@ let privateMessages = [];
 //input - logged in user (sender), push obj to arr only if this obj's name same;
 //[{message, receiver, isPublic, user, id, time}, {......}] -> {[user.name]: [{message, receiver, isPublic, user, id, time}]}
    //returns object of all users with their corresponding arrays of values
-app.use(cors())
+//app.use(cors())
 const allMessages = (user) => {      
     return privateMessages.reduce((acc, obj) => { 
         if(obj.user.name === user.name){
