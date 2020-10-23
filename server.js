@@ -1,8 +1,6 @@
 
 const app = require('http').createServer();
-const io = require('socket.io')(app, {
-        log: false,
-        agent: false,
+const io = require('socket.io')(app, {       
         origins: '*:*'        
     });
 const uuid = require('uuid/v4');
