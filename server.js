@@ -6,7 +6,7 @@ const http = require('http').createServer(app, (req, res) => {
 const io = require('socket.io')(http);
 const uuid = require('uuid/v4');
 var cors = require("cors");
-
+const port = process.env.PORT || 5000
 let users = {};
 let publicMessages = [];
 let privateMessages = [];
@@ -99,4 +99,4 @@ io.on('connection', (socket) => {
 const getTime = (date)=>{
     return `${date.getHours()}:${("0"+date.getMinutes()).slice(-2)}`; }
 
-http.listen(5000, () => console.log(`server is running on port 5000`));
+http.listen(PORT, () => console.log(`server is running on port ${PORT}`));
