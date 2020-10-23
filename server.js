@@ -1,8 +1,7 @@
+var app = require('express')();
+const http = require('http').createServer(app);
 
-const app = require('http').createServer();
-const io = require('socket.io')(app, {       
-        origins: '*:*'        
-    });
+const io = require('socket.io')(http);
 const uuid = require('uuid/v4');
 var cors = require("cors");
 
@@ -13,6 +12,7 @@ let privateMessages = [];
 //input - logged in user (sender), push obj to arr only if this obj's name same;
 //[{message, receiver, isPublic, user, id, time}, {......}] -> {[user.name]: [{message, receiver, isPublic, user, id, time}]}
    //returns object of all users with their corresponding arrays of values
+app.use(cors())
 const allMessages = (user) => {      
     return privateMessages.reduce((acc, obj) => { 
         if(obj.user.name === user.name){
@@ -97,4 +97,4 @@ io.on('connection', (socket) => {
 const getTime = (date)=>{
     return `${date.getHours()}:${("0"+date.getMinutes()).slice(-2)}`; }
 
-app.listen(5000, () => console.log(`server is running on port 5000`));
+http.listen(5000, () => console.log(`server is running on port 5000`));
