@@ -2,6 +2,7 @@ var app = require('express')();
 const http = require('http').createServer(app);
 
 const io = require('socket.io')(http);
+io.set('origins', '*:*');
 const uuid = require('uuid/v4');
 var cors = require("cors");
 
