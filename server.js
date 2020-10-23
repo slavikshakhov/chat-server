@@ -1,7 +1,9 @@
 var app = require('express')();
-const http = require('http').createServer(app);
+const http = require('http').createServer(app, (req, res) => {
+     res.setHeader('Access-Control-Allow-Origin', '*');
+});
 
-const io = require('socket.io')(http, { origins: '*:*'});
+const io = require('socket.io')(http);
 const uuid = require('uuid/v4');
 var cors = require("cors");
 
