@@ -6,7 +6,7 @@ const http = require('http').createServer(app, (req, res) => {
 const io = require('socket.io')(http);
 const uuid = require('uuid/v4');
 var cors = require("cors");
-const port = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000
 let users = {};
 let publicMessages = [];
 let privateMessages = [];
@@ -14,7 +14,7 @@ let privateMessages = [];
 //input - logged in user (sender), push obj to arr only if this obj's name same;
 //[{message, receiver, isPublic, user, id, time}, {......}] -> {[user.name]: [{message, receiver, isPublic, user, id, time}]}
    //returns object of all users with their corresponding arrays of values
-//app.use(cors())
+app.use(cors())
 const allMessages = (user) => {      
     return privateMessages.reduce((acc, obj) => { 
         if(obj.user.name === user.name){
