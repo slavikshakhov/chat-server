@@ -99,7 +99,7 @@ io.on('connection', (socket) => {
             if(el[1].socketID === socket.id){
                 delete users[el[0]]
             }
-        });        
+        });          
     })      
 });
 
