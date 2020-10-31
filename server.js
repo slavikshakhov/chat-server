@@ -93,7 +93,14 @@ io.on('connection', (socket) => {
         else if(!isTyping) {
             io.emit('TYPING', false, null);  
         }
-    });       
+    }); 
+    socket.on('disconnect', () => {        
+        Object.entries(users).map((el) => {
+            if(el[1].socketID === socket.id){
+                delete users[el[0]]
+            }
+        });        
+    })      
 });
 
 const getTime = (date)=>{
